@@ -41,9 +41,9 @@ Folder containing Python 3 bytecode compiled and ready to be executed. To speed 
 * keras
 
 ## Authors
-* **Nikita Kodkany** - *Aspiring Machine Learning Practioner*
+* **Nikita Kodkany** - *Machine Learning Practioner*
 * **Nischal Kanishk** - *Web Developer*
-* **Prathamesh Korannae** - *Aspiring Machine Learning Practioner*
+* **Prathamesh Korannae** - *Machine Learning Practioner*
 * **Prithvi Gudodagi** - *Aspiring Cyber Security Practioner*
 
 ## Reference
