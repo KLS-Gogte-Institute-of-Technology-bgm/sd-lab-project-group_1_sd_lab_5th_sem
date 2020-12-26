@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from archive.datasetloader import load_data
 from archive.datapreprocessor import datapreprocessor
-from flask import Flask , render_template
+from flask import Flask , render_template, request,redirect
 
 
 
@@ -48,6 +48,18 @@ def display():
 @app.route('/login')
 def login():   
     return render_template('login.html')
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+@app.route('/send',methods = ['POST', 'GET'])
+def send():
+    if request.method == 'POST':
+        result = request.form
+        print(result)
+    return redirect('/login')
+
     
 @app.route('/movies')
 def index():
