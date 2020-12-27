@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Ratings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=K2D:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
+
     <style>
 /* Style The Dropdown Button */
+body{
+  background-color: #374954;
+}
 .dropbtn {
   background-color: #4CAF50;
   color: white;
@@ -49,32 +58,270 @@
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
+/* CodePen demo */
+body {
+  background: #2a2a2b;
+  color: #fff;
+  text-align: center;
+  font-family: Arial, Helvetica;
+}
+
+.big {
+  font-size: 1.2em;
+}
+
+.small {
+  font-size: .7em;
+}
+
+.square {
+  width: .7em;
+  height: .7em;
+  margin: .5em;
+  display: inline-block;
+}
+
+/* Custom dropdown */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px; /* demo only */
+}
+
+.custom-dropdown select {
+  background-color: #1abc9c;
+  color: #fff;
+  font-size: inherit;
+  padding: .5em;
+  padding-right: 2.5em;	
+  border: 0;
+  margin: 0;
+  border-radius: 3px;
+  text-indent: 0.01px;
+  text-overflow: '';
+  -webkit-appearance: button; /* hide default arrow in chrome OSX */
+}
+
+.custom-dropdown::before,
+.custom-dropdown::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.custom-dropdown::after { /*  Custom dropdown arrow */
+  content: "\25BC";
+  height: 1em;
+  font-size: .625em;
+  line-height: 1;
+  right: 1.2em;
+  top: 50%;
+  margin-top: -.5em;
+}
+
+.custom-dropdown::before { /*  Custom dropdown arrow cover */
+  width: 2em;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.custom-dropdown select[disabled] {
+  color: rgba(0,0,0,.3);
+}
+
+.custom-dropdown select[disabled]::after {
+  color: rgba(0,0,0,.1);
+}
+
+.custom-dropdown::before {
+  background-color: rgba(0,0,0,.15);
+}
+
+.custom-dropdown::after {
+  color: rgba(0,0,0,.4);
+}
+
+body {
+  background: #2a2a2b;
+  color: #fff;
+  text-align: center;
+  font-family: Arial, Helvetica;
+}
+
+.big {
+  font-size: 1.2em;
+}
+
+.small {
+  font-size: .7em;
+}
+
+.square {
+  width: .7em;
+  height: .7em;
+  margin: .5em;
+  display: inline-block;
+}
+
+/* Custom dropdown */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px; /* demo only */
+}
+.input {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px;
+  background-color: #1abc9c;
+  font-size: inherit;
+  padding: .5em;
+  padding-right: 2.5em;	
+  border: 0;
+  margin: 0;
+  border-radius: 3px;
+  text-indent: 0.01px;
+  text-overflow: '';
+  -webkit-appearance: button;
+}
+
+.custom-dropdown select {
+  background-color: #1abc9c;
+  color: #fff;
+  font-size: inherit;
+  padding: .5em;
+  padding-right: 2.5em;	
+  border: 0;
+  margin: 0;
+  border-radius: 3px;
+  text-indent: 0.01px;
+  text-overflow: '';
+  -webkit-appearance: button; /* hide default arrow in chrome OSX */
+}
+
+.custom-dropdown::before,
+.custom-dropdown::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.custom-dropdown::after { /*  Custom dropdown arrow */
+  content: "\25BC";
+  height: 1em;
+  font-size: .625em;
+  line-height: 1;
+  right: 1.2em;
+  top: 50%;
+  margin-top: -.5em;
+}
+
+.custom-dropdown::before { /*  Custom dropdown arrow cover */
+  width: 2em;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.custom-dropdown select[disabled] {
+  color: rgba(0,0,0,.3);
+}
+
+.custom-dropdown select[disabled]::after {
+  color: rgba(0,0,0,.1);
+}
+
+.custom-dropdown::before {
+  background-color: rgba(0,0,0,.15);
+}
+
+.custom-dropdown::after {
+  color: rgba(0,0,0,.4);
+}
+
 </style>
 </head>
 <body>
 
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Movie Recommender</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/index">Home <span class="sr-only"></span></a>
+            </li>
+            <a class="nav-link" href="/ratings">Ratings<span class="sr-only"></span></a>
+          </ul>
+        </div>
+    </div>
+    </nav>
 
-<nav class="navbar navbar-light bg-light justify-content-between">
-  <a href="/ratings" class="btn btn-outline-success my-2 my-sm-0">Ratings</a>
-</nav>
+<!-- <div class="main">
+  <p class="sign" align="center">Ratings</p>
 
-<div class="main">
-    <p class="sign" align="center">Ratings</p>
+  <form action="/sendrating" class="form1" method = "POST"> 
+      <select name="value">
+           {% for value in moviedata %}
+              <option value="{{value}}">{{value}}</option>
+           {% endfor %}
+      </select>
+   
+  <input class="pass" type="text" align="center" placeholder="Userid" name="userid"  required>
+  
+  <button class="submit" align="center" type="submit" >Submit</button>  
 
-    <form action="/sendrating" class="form1" method = "POST"> 
-        <select name="value">
-             {% for value in moviedata %}
-                <option value="{{value}}">{{value}}</option>
-             {% endfor %}
-        </select>
-     
-    <input class="pass" type="text" align="center" placeholder="Userid" name="userid"  required>
-    
-    <button class="submit" align="center" type="submit" >Submit</button>  
+  </form>    
+</div> -->
+<h2>Movie Ratings Search</h2>
 
-    </form>    
-</div>
+<span class="color-picker"></span>
+
+<br/><br/>
+
+<span class="custom-dropdown big">
+    <select name="value">    
+      {% for value in moviedata %}
+      <option value="{{value}}">{{value}}</option>
+   {% endfor %}
+    </select>
+</span>
+<span class="input">
+  <input class="pass" type="text" align="center" placeholder="Userid" name="userid"  required>
+</span>
+<button class="btn btn-light" align="center" type="submit" >Submit</button>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-
+<script>/* JS for demo only */
+  var colors = ['1abc9c', '2c3e50', '2980b9', '7f8c8d', 'f1c40f', 'd35400', '27ae60'];
+  
+  colors.each(function (color) {
+    $$('.color-picker')[0].insert(
+      '<div class="square" style="background: #' + color + '"></div>'
+    );
+  });
+  
+  $$('.color-picker')[0].on('click', '.square', function(event, square) {
+    background = square.getStyle('background');
+    $$('.custom-dropdown select').each(function (dropdown) {
+      dropdown.setStyle({'background' : background});
+    });
+  });
+  
+  /*
+   * Original version at
+   * http://red-team-design.com/making-html-dropdowns-not-suck
+   */ </script>
 </body>
 </html>
+
