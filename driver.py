@@ -146,8 +146,9 @@ def index():
     print(user_selected)
     movies_watched_by_user = config.lens[config.lens.user_id == user_selected]
 
-
-    print(movies_watched_by_user)
+    if movies_watched_by_user.empty:
+        return render_template('error.html' , data = "You have not reviewed any movies")
+    
 
     movies_not_watched = config.lens[~config.lens["movie_id"].isin(movies_watched_by_user.movie_id.values)
     ]["movie_id"]
@@ -163,6 +164,8 @@ def index():
     user_movie_array = np.hstack(
         ([[user_encoder]] * len(movies_not_watched), movies_not_watched)
     )  #user_movie_array consists of selected_user in userfind and moviefind
+
+    print(user_movie_array)
 
     rate = model.predict(user_movie_array)
     ratings = model.predict(user_movie_array).flatten()

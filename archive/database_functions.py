@@ -10,7 +10,7 @@ def addUser(user_id,password , confirm_pass):
 
     if config.logins.user_id.isin([user_id]).any():
         return -2
-    config.logins = config.logins.append({'user_id':user_id , 'password':password} , ignore_index = True)
+    config.logins = config.logins.append({'user_id':int(user_id) , 'password':int(password)} , ignore_index = True)
 
     return 1
     
