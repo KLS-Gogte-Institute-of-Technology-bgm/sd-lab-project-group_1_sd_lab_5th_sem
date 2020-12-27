@@ -50,6 +50,17 @@ model.compile(
 
 app = Flask(__name__)
 
+@app.route('/ratings',methods = ['POST','GET'])
+def route():
+    movies = list(lens['title'].unique())
+    return render_template('ratings.html',movie = movies)
+
+@app.route('/sendrating', methods = ['POST','GET'])
+def sendrating():
+    if request.method == 'POST':
+        result = request.form
+        print(result)
+    return redirect('/')
 
 
 @app.route('/' , methods = ['POST','GET'])
