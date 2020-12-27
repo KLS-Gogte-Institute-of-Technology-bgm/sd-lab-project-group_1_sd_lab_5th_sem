@@ -119,9 +119,6 @@
 
 
 <nav class="navbar navbar-light bg-light justify-content-between">
-  <form class="form-inline">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
   <a href="/ratings" class="btn btn-outline-success my-2 my-sm-0">Ratings</a>
 </nav>
     <!-- <div class="main">
@@ -133,7 +130,7 @@
     </div> -->
     <div class="main">
         <p class="sign" align="center">Log in</p>
-    <form action="/movies" class="form1"> 
+    <form action="/loginsend" class="form1" method = "POST"> 
             <input class="un" type="text" align="center" placeholder="Enter Username" name="username" required>     
             <input class="pass" type="password" align="center" placeholder="Enter Password" name="password" required>  
             <button class="submit" align="center" type="submit">Login</button>      
