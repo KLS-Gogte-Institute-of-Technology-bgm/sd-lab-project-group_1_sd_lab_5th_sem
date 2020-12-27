@@ -58,6 +58,19 @@ def sendrating():
         print(result)
     return redirect('/')
 
+@app.route('/loginsend', methods = ['POST','GET'])
+def loginsend():
+    if request.method == 'POST':
+        result = request.form
+        print(result)
+    return redirect('/movies')
+
+@app.route('/error', methods = ['POST','GET'])
+def error():
+    data = "Agreed"
+    return render_template('error.html',data=data)
+
+
 
 @app.route('/' , methods = ['POST','GET'])
 def display():
