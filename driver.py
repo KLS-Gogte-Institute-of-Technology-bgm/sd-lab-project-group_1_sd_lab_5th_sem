@@ -8,51 +8,59 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from archive.datasetloader import load_data
 from archive.datapreprocessor import datapreprocessor
-from archive.database_functions import rate,authenticate
+from archive.database_functions import rate,authenticate,addUser
 from flask import Flask , render_template, request,redirect
-
+import archive.config as config
 # Number of users is 943
+
+
+
+
 
 
 EMBEDDING_SIZE = 50
 
-lens, user_id, num_movies, num_users, xtrain, ytrain, xval, yval , movie_id ,id_movie , user_id , id_user  = datapreprocessor()
+# lens, user_id, num_movies, num_users, xtrain, ytrain, xval, yval , movie_id ,id_movie , user_id , id_user  = datapreprocessor()
 
-movies = lens['title'].unique()
+# movies = lens['title'].unique()
 
-lens = rate(1 , "Sliding Doors (1998)" , 5 , lens , movies)
-logins = [[i+1,i+1] for i in range(943)]
-logins = pd.DataFrame(logins , columns = ['user_id','password'])
-
-
+# #lens = rate(1 , "Sliding Doors (1998)" , 5 , lens , movies)
+# logins = [[i+1,i+1] for i in range(943)]
+# logins = pd.DataFrame(logins , columns = ['user_id','password'])
 
 
-model = RecommenderNet(num_users, num_movies, EMBEDDING_SIZE)
+
+print(config.lens.head())
+
+
+model = RecommenderNet(config.num_users, config.num_movies, EMBEDDING_SIZE)
 model.compile(
     loss=tf.keras.losses.BinaryCrossentropy(), optimizer=keras.optimizers.Adam(lr=0.001)
 )
 
 history = model.fit(
-    x=xtrain,
-    y=ytrain,
+    x=config.xtrain,
+    y=config.ytrain,
     batch_size=64,
     epochs=5,
     verbose=1,
-    validation_data=(xval, yval),
+    validation_data=(config.xval, config.yval),
 )
 
 
 
-model = RecommenderNet(num_users, num_movies, EMBEDDING_SIZE)
+model = RecommenderNet(config.num_users, config.num_movies, EMBEDDING_SIZE)
 model.compile(
     keras.optimizers.Adam(lr=0.001), loss="mean_squared_error",
     metrics=["mean_absolute_error", "mean_squared_error"])
+
+
 
 app = Flask(__name__)
 
 @app.route('/ratings',methods = ['POST','GET'])
 def route():
-    movies = list(lens['title'].unique())
+    movies = list(config.lens['title'].unique())
     return render_template('ratings.html',movie = movies)
 
 @app.route('/sendrating', methods = ['POST','GET'])
@@ -80,6 +88,17 @@ def send():
     if request.method == 'POST':
         result = request.form
         print(result)
+        user_id = result.get('username' )
+        password = result.get('password' )
+        confirm_pass = result.get('password_confirm' )
+        print(user_id)
+        if addUser(user_id,password,confirm_pass) == 1:
+            print(config.logins) 
+            return redirect('/login')
+        elif addUser(user_id,password,confirm_pass) == -1:
+            print(config.logins)  
+            return render_template('register.html')
+
 
 
     return redirect('/login')
@@ -87,22 +106,22 @@ def send():
     
 @app.route('/movies')
 def index():        
-    user_selected = lens.user_id.sample(3).iloc[2]
+    user_selected = config.lens.user_id.sample(3).iloc[2]
 
-    movies_watched_by_user = lens[lens.user_id == 1000]
+    movies_watched_by_user = config.lens[config.lens.user_id == 378]
 
     print(movies_watched_by_user)
 
-    movies_not_watched = lens[~lens["movie_id"].isin(movies_watched_by_user.movie_id.values)
+    movies_not_watched = config.lens[~config.lens["movie_id"].isin(movies_watched_by_user.movie_id.values)
     ]["movie_id"]
 
     movies_not_watched = list(
-        set(movies_not_watched).intersection(set(movie_id.keys()))
+        set(movies_not_watched).intersection(set(config.movie_id.keys()))
     )
 
-    movies_not_watched = [[movie_id.get(x)] for x in movies_not_watched]
+    movies_not_watched = [[config.movie_id.get(x)] for x in movies_not_watched]
 
-    user_encoder = user_id.get(user_selected)
+    user_encoder = config.user_id.get(user_selected)
 
     user_movie_array = np.hstack(
         ([[user_encoder]] * len(movies_not_watched), movies_not_watched)
@@ -116,36 +135,34 @@ def index():
     #returns top 10 max ratings' indices
     top_ratings_indices = ratings.argsort()[-10:][::-1]
     recommended_movie_ids = [
-        id_movie.get(movies_not_watched[x][0]) for x in top_ratings_indices
+        config.id_movie.get(movies_not_watched[x][0]) for x in top_ratings_indices
     ]
 
 
 
 
-    print("Showing recommendations for user: {}".format(user_selected))
-    print("#######" * 6)
-    print("Movies with high ratings from user")
-    print("#######" * 6)
+
+
 
     top_movies_user = (movies_watched_by_user.sort_values(by="rating", ascending=False).head(10).movie_id.values)
     #print(top_movies_user)
 
-    lens_rows = lens[lens["movie_id"].isin(top_movies_user)]
+    lens_rows = config.lens[config.lens["movie_id"].isin(top_movies_user)]
     lens_rows = lens_rows.drop_duplicates(subset = ["title"])
     #print(lens3_rows)
 
-    for row in lens_rows.itertuples(): #The itertuples() function is used to iterate over DataFrame rows as namedtuples.
-        print(row.title)
+    # for row in lens_rows.itertuples(): #The itertuples() function is used to iterate over DataFrame rows as namedtuples.
+    #     print(row.title)
 
-    print("#######" * 6)
-    print("Top 10 movie recommendations")
-    print("#######" * 6)
+    # print("#######" * 6)
+    # print("Top 10 movie recommendations")
+    # print("#######" * 6)
 
-    recommended_movies = lens[lens["movie_id"].isin(recommended_movie_ids)]
+    recommended_movies = config.lens[config.lens["movie_id"].isin(recommended_movie_ids)]
     recommended_movies = recommended_movies.drop_duplicates(subset = ["title"])
 
-    for row in recommended_movies.itertuples():
-        print(row.title)
+    #for row in recommended_movies.itertuples():
+        #print(row.title)
 
     return render_template('movies.html',user=movies_watched_by_user,movie=recommended_movies)
 
