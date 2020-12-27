@@ -9,9 +9,12 @@ from tensorflow.keras import layers
 from archive.datasetloader import load_data
 from archive.datapreprocessor import datapreprocessor
 from archive.database_functions import rate,authenticate,addUser
-from flask import Flask , render_template, request,redirect
+from flask import Flask , render_template, request,redirect,url_for,session
 import archive.config as config
-# Number of users is 943
+import json
+#from flask.ext.session import Session
+
+# Number of users is 943    
 
 
 
@@ -58,6 +61,7 @@ model.compile(
 
 app = Flask(__name__)
 
+
 @app.route('/ratings',methods = ['POST','GET'])
 def route():
     movies = list(config.lens['title'].unique())
@@ -67,18 +71,29 @@ def route():
 def sendrating():
     if request.method == 'POST':
         result = request.form
-        print(result)
+        
     return redirect('/')
 
 @app.route('/loginsend', methods = ['POST','GET'])
 def loginsend():
     if request.method == 'POST':
         result = request.form
-        print(result)
+        user_id = result.get('username')
+        password = result.get('password')
+
+        if authenticate(user_id,password) == 1:
+            messages = json.dumps({"main":user_id})
+            session['messages'] = messages
+            return redirect(url_for('.index' , messages = messages))
+        if authenticate(user_id,password) == -1:
+            return render_template('error.html' , data = 'User does not exist')
+        if authenticate(user_id , password) == -2:
+            return render_template('error.html' , data = 'Password incorrect')    
+
     return redirect('/movies')
 
 @app.route('/error', methods = ['POST','GET'])
-def error():
+def error():    
     data = "Agreed"
     return render_template('error.html',data=data)
 
@@ -105,22 +120,27 @@ def send():
         password = result.get('password' )
         confirm_pass = result.get('password_confirm' )
         print(user_id)
+        print(config.logins.head())
         if addUser(user_id,password,confirm_pass) == 1:
             print(config.logins) 
             return redirect('/login')
         elif addUser(user_id,password,confirm_pass) == -1:
             print(config.logins)  
-            return render_template('register.html')
+            return render_template('error.html' , data = "Passwords do not match")
+        elif addUser(user_id , password , confirm_pass) == -2:
+            return render_template('error.html' , data = "User already exists in database")
 
-
-
-    return redirect('/login')
+    # return redirect('/login')
 
     
 @app.route('/movies')
-def index():        
-    user_selected = config.lens.user_id.sample(3).iloc[2]
-
+def index():  
+    messages = request.args['messages']
+    messages = session['messages']
+    messages = json.loads(messages)
+    print(messages)     
+    user_selected = int(messages.get('main'))
+    print(user_selected)
     movies_watched_by_user = config.lens[config.lens.user_id == 378]
 
     print(movies_watched_by_user)
@@ -244,5 +264,8 @@ def index():
 #     print(row.title)
     
 if __name__ == '__main__':
-	app.run(debug=True, host='0.0.0.0')
+    app.secret_key = 'super secret key'
+    app.config['SESSION_TYPE'] = 'filesystem'
+
+    app.run(debug=True, host='0.0.0.0')
     

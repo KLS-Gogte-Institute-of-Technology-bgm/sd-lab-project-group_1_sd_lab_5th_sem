@@ -8,7 +8,7 @@ def addUser(user_id,password , confirm_pass):
     if password != confirm_pass:
         return -1
 
-    if user_id in config.logins.user_id:
+    if config.logins.user_id.isin([user_id]).any():
         return -2
     config.logins = config.logins.append({'user_id':user_id , 'password':password} , ignore_index = True)
 
@@ -17,12 +17,17 @@ def addUser(user_id,password , confirm_pass):
     
 
 def authenticate(user_id , password):
-    if user_id not in config.logins.user_id:
+    if not config.logins.user_id.isin([user_id]).any():
         return -1
         
     else: 
-        key = config.logins[config.logins.user_id == user_id].password
-        if key == password:
+
+        print(config.logins)
+        print(user_id)
+        key = config.logins[config.logins.user_id == int(user_id)].password.values
+        print(key)
+        
+        if key == int(password):
             return 1 
 
         else:
