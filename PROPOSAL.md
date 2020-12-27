@@ -26,9 +26,9 @@ In user-based collaborative filtering, we have an active user for whom the recom
 * Python
 
 ## Authors
-* **Nikita Kodkany** - *Aspiring Machine Learning Practioner*
+* **Nikita Kodkany** - *Machine Learning Practioner*
 * **Nischal Kanishk** - *Full-Stack Developer*
-* **Prathamesh Koranne** - *Aspiring Machine Learning Practioner*
+* **Prathamesh Koranne** - *Machine Learning Practioner*
 * **Prithvi Gudodagi** - *Aspiring Cyber Security Practioner*
 
 ## Reference
