@@ -64,9 +64,8 @@ app = Flask(__name__)
 
 @app.route('/ratings',methods = ['POST','GET'])
 def route():
-
     moviedata = list(config.lens['title'].unique())
-    return render_template('ratings.html',movie = moviedata)
+    return render_template('ratings.html',moviedata = moviedata)
 
 
 @app.route('/sendrating', methods = ['POST','GET'])
