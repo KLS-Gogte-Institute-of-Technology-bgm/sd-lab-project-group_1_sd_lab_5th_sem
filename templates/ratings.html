@@ -63,12 +63,12 @@
 
     <form action="/sendrating" class="form1" method = "POST"> 
         <select name="value">
-             {% for value in movie %}
+             {% for value in moviedata %}
                 <option value="{{value}}">{{value}}</option>
              {% endfor %}
         </select>
      
-    <input class="pass" type="text" align="center" placeholder="Userid" name="userid" value="userid" required>
+    <input class="pass" type="text" align="center" placeholder="Userid" name="userid"  required>
     
     <button class="submit" align="center" type="submit" >Submit</button>  
 
