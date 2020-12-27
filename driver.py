@@ -144,8 +144,8 @@ def index():
     print(messages)     
     user_selected = int(messages.get('main'))
     print(user_selected)
-    movies_watched_by_user = config.lens[config.lens.user_id == 378]
-=
+    movies_watched_by_user = config.lens[config.lens.user_id == user_selected]
+
 
     print(movies_watched_by_user)
 
