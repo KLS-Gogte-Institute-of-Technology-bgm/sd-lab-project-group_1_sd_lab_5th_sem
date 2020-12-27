@@ -13,17 +13,15 @@ To run the Movie Recommender System - Run the script `driver.py`
 * Python
 * HTML
 ## Python Dependencies
-* numpy
+* NumPy
 * pandas
-* tensorflow
+* TensorTlow
 * matplotlib
-* keras
+* Keras
+* Flask
 
 ## Authors
 * **Nikita Kodkany** - *Machine Learning Practioner*
 * **Nischal Kanishk** - *Web Developer*
 * **Prathamesh Korannae** - *Machine Learning Practioner*
 * **Prithvi Gudodagi** - *Aspiring Cyber Security Practioner*
-
-## Reference
-* Andrew Ng
