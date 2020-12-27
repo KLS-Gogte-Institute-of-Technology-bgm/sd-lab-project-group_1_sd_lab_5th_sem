@@ -64,8 +64,10 @@ app = Flask(__name__)
 
 @app.route('/ratings',methods = ['POST','GET'])
 def route():
-    movies = list(config.lens['title'].unique())
-    return render_template('ratings.html',movie = movies)
+
+    moviedata = list(config.lens['title'].unique())
+    return render_template('ratings.html',movie = moviedata)
+
 
 @app.route('/sendrating', methods = ['POST','GET'])
 def sendrating():
@@ -134,6 +136,7 @@ def send():
 
     
 @app.route('/movies')
+
 def index():  
     messages = request.args['messages']
     messages = session['messages']
@@ -142,6 +145,7 @@ def index():
     user_selected = int(messages.get('main'))
     print(user_selected)
     movies_watched_by_user = config.lens[config.lens.user_id == 378]
+=
 
     print(movies_watched_by_user)
 
