@@ -8,6 +8,16 @@ With collaborative filtering, the system is based on past interactions between u
 ## Our Project
 We built a Movie Recommender System such it is open to any user to either login or create a new account. Once the credentials are accounted for, he/she is given a list of movies to select from. This way he/she can also rate the selected movie and once he/she has finished watching the movie it is added to the watched movie list. Hence the recommended list is updated with a new set for the user.
 
+### Project Artifacts
+#### Use-Case Diagram
+![Use Case diagram](https://user-images.githubusercontent.com/50879589/103168609-0f85ad80-484e-11eb-9be7-3742ef847db8.png)
+
+#### Sequence Diagram
+![Sequence Diagram](https://user-images.githubusercontent.com/50879589/103168606-01379180-484e-11eb-972f-6e5f5d921b54.png)
+
+#### Activity Diagram
+![Activity Diagram](https://user-images.githubusercontent.com/50879589/103168599-f3820c00-484d-11eb-8e0c-b0d85939dff2.png)
+
 ## Overview
 ### Built with
 * Python
@@ -58,7 +68,11 @@ The last 19 fields are the genres, a 1 indicates the movie is of that genre, a 0
 *	The Adam optimizer is used to minimize the accuracy losses between the predicted values and the actual test values.
 
 ### Results
-xXx
+A Good Fit!
+![MAE](https://user-images.githubusercontent.com/50879589/103168626-3a700180-484e-11eb-85c5-fd66d97f6d7f.png)
+
+1. The plot of training loss decreasesto a point of stability
+2. The plot ofvalidation loss decreases to a point of stability and has a small gap with the training loss
 
 ## Understanding The Repository
 ### *archive* (directory)

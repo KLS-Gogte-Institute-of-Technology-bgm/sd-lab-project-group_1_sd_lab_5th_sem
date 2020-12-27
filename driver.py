@@ -8,19 +8,23 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from archive.datasetloader import load_data
 from archive.datapreprocessor import datapreprocessor
-from archive.database_functions import rate
+from archive.database_functions import rate,authenticate
 from flask import Flask , render_template, request,redirect
 
-
+# Number of users is 943
 
 
 EMBEDDING_SIZE = 50
 
 lens, user_id, num_movies, num_users, xtrain, ytrain, xval, yval , movie_id ,id_movie , user_id , id_user  = datapreprocessor()
-print(lens.head(-1))
+
 movies = lens['title'].unique()
 
 lens = rate(1 , "Sliding Doors (1998)" , 5 , lens , movies)
+logins = [[i+1,i+1] for i in range(943)]
+logins = pd.DataFrame(logins , columns = ['user_id','password'])
+
+
 
 
 model = RecommenderNet(num_users, num_movies, EMBEDDING_SIZE)
@@ -89,11 +93,13 @@ def send():
     if request.method == 'POST':
         result = request.form
         print(result)
+
+
     return redirect('/login')
 
     
 @app.route('/movies')
-def index():
+def index():        
     user_selected = lens.user_id.sample(3).iloc[2]
 
     movies_watched_by_user = lens[lens.user_id == 1000]
