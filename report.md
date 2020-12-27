@@ -8,6 +8,9 @@ With collaborative filtering, the system is based on past interactions between u
 ## Our Project
 We built a Movie Recommender System such it is open to any user to either login or create a new account. Once the credentials are accounted for, he/she is given a list of movies to select from. This way he/she can also rate the selected movie and once he/she has finished watching the movie it is added to the watched movie list. Hence the recommended list is updated with a new set for the user.
 
+### Project Demo
+https://drive.google.com/file/d/1wS7vny66ndf-ckTW58wwBuDaQvs0pYNS/view?usp=sharing
+
 ### Project Artifacts
 #### Use-Case Diagram
 ![Use Case diagram](https://user-images.githubusercontent.com/50879589/103168609-0f85ad80-484e-11eb-9be7-3742ef847db8.png)
